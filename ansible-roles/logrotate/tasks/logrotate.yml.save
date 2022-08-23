@@ -1,0 +1,24 @@
+---
+- hosts: all
+  become: true
+
+  tasks:
+    - name: Install logrotate
+      package:
+        name: logrotate
+        state: present
+    - name: Create logrotate config file
+      file:
+        path: "/etc/logrotate.d/nginx"
+        state: touch
+        mode: "0644"
+    - name: Add config block to nginx config file
+      blockinfile:
+        path: "/etc/logrotate.d/nginx"
+        block: |
+          /var/log/nginx {
+            maxsize 20K
+            notifempty
+            missingok
+            
+          }
