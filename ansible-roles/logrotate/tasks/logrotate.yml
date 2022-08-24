@@ -17,7 +17,7 @@
         path: "/etc/logrotate.d/nginx"
         block: |
           /var/log/nginx {
-            maxsize 1M
+            maxsize 100M
             notifempty
             missingok
             rotate 0
